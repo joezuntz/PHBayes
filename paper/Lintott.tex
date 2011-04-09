@@ -1,0 +1,79 @@
+\documentclass[useAMS,usenatbib,a4paper]{mn2e}
+\title[Bayesian Planet Hunting]{A Bayesian approach to PlanetHunters.org data\thanks{This publication has been made possible by the participation of the volunteers of the PlanetHunters project. Their contributions are individually acknowledged at http://www.planethunters.org/XXXXXXXXXX}}
+\author[Lintott et al.]{
+\parbox[t]{16cm}{Chris J. Lintott$^{1,2}$\thanks{Email: cjl@astro.ox.ac.uk}, Joe Zuntz$^{2,3}$ and the Planet Hunters team\\}\\ 
+$^{1}$Adler Planetarium, 1300 S. Lakeshore Drive, Chicago, IL 60616, USA\\
+$^{2}$Oxford Astrophysics, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, UK\\
+$^{3}$Department of Physics, University College London, Gower Street, London, WC1E 6BT, UK\\
+}
+
+\usepackage[dvips]{graphicx}
+\usepackage{setspace}
+
+\begin{document}
+
+\date{April 2011}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}} \pubyear{2011}
+
+\maketitle
+
+\label{firstpage}
+
+\begin{abstract}
+Abstract abstract abstract
+
+\end{abstract}
+
+\begin{keywords}
+Some keywords
+\end{keywords}
+
+\section{Introduction}
+
+Finding planets is really important. Planet Hunters is a citizen science project from the Zooniverse which provides an independent analysis of data from NASA's \emph{Kepler} satellite. Volunteers inspect light curves, looking for transits, but need the awesome power of Bayesian statistics to answer the question of the number of planets. 
+
+\section{Synthetics}
+
+If not part of Meg's paper, write about the synthetics here
+
+\section{Bayesian analysis}
+%Mostly notes from first conversation in canteen after .Astronomy
+
+Our goal is to estimate from Planet Hunters classifications the number of planets in the Kepler field, and their mass distribution ie
+
+\begin{equation}
+p\left(n\left(m_i\right)f_t\left(m_i\right)|data\right)
+\end{equation}
+
+where $m_i$ is the mass of a particular planet, $i$, $\mathrm{n\left(m_i\right)}$ is the fraction of stars with a planet of mass $m_i$. \footnote{What are we going to do with multiple planets? Or doesn't it matter?}
+
+Insert justification for Bayesian magic.
+
+\begin{eqnarray}
+\lefteqn{p\left(\mathrm{data}|n\left(m_i\right)f_t\left(m_i\right)\right)=} \nonumber \\ & p\left(\mathrm{data_{synth}}|n\left(m_i\right)f_t\left(m_i\right)\right) \nonumber  \\ & \times p\left(\mathrm{data_{notsynth}}|n\left(m_i\right)f_t\left(m_i\right)\right)
+\end{eqnarray}
+
+But $p\left(\mathrm{data_{synth}}|n\left(m_i\right)f_t\left(m_i\right)\right)$ is the probability of getting $\mathrm{data_synth}$ transits per star, which follows a binomial distribution with $\mathrm{p\left(transit\right)}=f_t$ for given mass. 
+
+And
+
+\begin{eqnarray}
+\lefteqn{p\left(\mathrm{data_{notsynth}}|n\left(m_i\right)f_t\left(m_i\right)\right)=} \nonumber \\ & \prod_{\mathrm{stars}}\left(p\left(f'_t\left(m_i\right)|f_tn\left(m_i\right)\right)\right) \nonumber \\ & + \left(p\left(\left(1-f'_t\left(m_i\right)\right)|f_tn\left(m_i\right)\right)\right)
+\end{eqnarray}
+
+where $f'_t$ is the fraction actually clicked\footnote{Presumably this isn't mass dependent because we don't know. So what happened to the mass dependence?}. These are just binomial functions too, and for a given model we can now calculate everything and fit to our results. 
+
+So we need to marginalize over $f_t$ which means we need a model with $n$ points. The only priors we have are that for sufficiently large $m_i$ then $f_t=1$, and for sufficiently small $m_i$ $f_t=0$. We need some thought as to what `sufficiently' means here. The function is monotonic, and increasing. Joe is going to do some Gaussian-ness.
+
+We also need a prior on the mass distribution. Chris is going to look at pre-launch Kepler papers to see if there's a prediction we can use as a basis. 
+
+
+
+\begin{thebibliography}{99}
+
+
+\end{thebibliography}
+
+\label{lastpage}
+
+\end{document}
